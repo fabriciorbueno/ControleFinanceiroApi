@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ControleFinanceiro.Data\ControleFinanceiro.Data.csproj" />
+    <ProjectReference Include="..\ControleFinanceiro.Domain\ControleFinanceiro.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
