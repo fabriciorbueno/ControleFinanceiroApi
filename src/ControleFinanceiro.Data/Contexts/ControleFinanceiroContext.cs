@@ -1,13 +1,15 @@
 ﻿using ControleFinanceiro.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace ControleFinanceiro.Data.Contexts
 {
     public class ControleFinanceiroContext : DbContext
     {
-        public ControleFinanceiroContext()
+        private readonly IConfiguration _configuration;
+        public ControleFinanceiroContext(IConfiguration configuration)
         {
-
+            _configuration = configuration;
         }
 
         public ControleFinanceiroContext(DbContextOptions<ControleFinanceiroContext> options)
@@ -21,7 +23,7 @@ namespace ControleFinanceiro.Data.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=Asus-i7;Database=CONTROLE_FINANCEIRO;TrustServerCertificate=True;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer(_configuration.GetConnectionString("ControleFinanceiro"));
             }
         }
         #endregion ConnectionString
