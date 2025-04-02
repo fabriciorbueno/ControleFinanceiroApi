@@ -5,10 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\Repositories\ICasosRepository.cs" />
+    <Compile Remove="Interfaces\Repositories\IFichaPessoalRepository.cs" />
+    <Compile Remove="Interfaces\Services\ICasosService.cs" />
+    <Compile Remove="Interfaces\Services\IFichaPessoalService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.14" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
 </Project>

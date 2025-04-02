@@ -1,78 +1,32 @@
 ﻿using ControleFinanceiro.Data.Contexts;
-using ControleFinanceiro.Domain.Dtos.Request;
+using ControleFinanceiro.Domain.Entities;
 using ControleFinanceiro.Domain.Interfaces.Repositories;
-using ControleFinanceiro.Domain.Models.Entities;
-using Dapper;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
 using System.Threading.Tasks;
 
 namespace ControleFinanceiro.Data.Repositories
 {
-    public class CategoriaRepository : IGenericRepository
+    public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository, IBaseRepository<Categoria>
     {
-        public DatabaseContext _databaseContext { get; set; }
-        private readonly IConfiguration _configuration;
-
         public CategoriaRepository(
-            IConfiguration configuration
-            )
+            ControleFinanceiroContext context,
+            IHttpContextAccessor httpContextAccessor
+            ) : base(context, httpContextAccessor)
         {
-            _configuration = configuration;
-            _databaseContext = new DatabaseContext(new DbConnectionStringBuilder { ConnectionString = _configuration.GetConnectionString("gastosDb") });
         }
 
-        public async Task<IEnumerable<Entity>> BuscarTodosAsync()
+        public async Task<IEnumerable<Categoria>> ObterTodosAsync()
         {
             try
             {
-                string query = @"SELECT ID as Id, NOME as Nome, DESCRICAO as Descricao
-                                FROM CATEGORIA";
-
-                using (IDbConnection conn = _databaseContext.GetConnection())
-                {
-                    return await conn.QueryAsync<Entity>(query, commandType: CommandType.Text);
-                }
+                var result = await BuscarTodosAsync();
+                return result;
             }
             catch (Exception ex)
             {
-                throw new Exception($"InnerException: {ex.InnerException} | Message: {ex.Message}");
-            }
-        }
-
-        public async Task<bool> InserirAsync(RequestBase categoriaRequest)
-        {
-            try
-            {
-                DynamicParameters param = new DynamicParameters();
-                param.Add("@NOME", categoriaRequest.Nome, DbType.String);
-                param.Add("@DESCRICAO", categoriaRequest.Descricao, DbType.String);
-                string query;
-
-                query = string.IsNullOrEmpty(categoriaRequest.Descricao)
-                    ? @"INSERT INTO CATEGORIA (NOME) VALUES (@NOME)"
-                    : @"INSERT INTO CATEGORIA (NOME, DESCRICAO) VALUES (@NOME, @DESCRICAO)";
-
-                using (IDbConnection conn = _databaseContext.GetConnection())
-                {
-                    var response = await conn.ExecuteAsync(query, param, commandType: CommandType.Text);
-
-                    if (response > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"InnerException: {ex.InnerException} | Message: {ex.Message}");
+                throw new Exception(ex.Message);
             }
         }
     }

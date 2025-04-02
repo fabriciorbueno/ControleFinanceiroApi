@@ -73,18 +73,6 @@ namespace ControleFinanceiro.Api
 
             var env = Configuration.GetValue<string>("ENVIRONMENT");
 
-            //Criacao de politica cors
-            services.AddCors(options =>
-            {
-                options.AddPolicy("PoliticaDev",
-                builder =>
-                {
-                    builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-                });
-            });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,8 +89,6 @@ namespace ControleFinanceiro.Api
             app.UseSwaggerUI();
 
             app.UseHsts();
-
-            app.UseCors("PoliticaDev");
 
             app.UseHealthChecks("/health")
                 .UseSwagger()
