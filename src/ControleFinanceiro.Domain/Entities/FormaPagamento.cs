@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleFinanceiro.Domain.Entities
 {
-    [Table("CATEGORIA")]
-    public class Categoria
+    [Table("FORMA_PAGAMENTO")]
+    public class FormaPagamento
     {
-        protected Categoria() { }
-        public Categoria(
+        protected FormaPagamento() { }
+        public FormaPagamento(
             string descricao
             )
         {

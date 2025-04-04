@@ -34,7 +34,5 @@ namespace ControleFinanceiro.Domain.Entities
         {
             Cpf = cpf;
         }
-
-        //[ForeignKey(nameof(Id))]
     }
 }
