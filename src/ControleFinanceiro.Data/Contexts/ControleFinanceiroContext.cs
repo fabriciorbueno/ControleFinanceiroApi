@@ -32,6 +32,10 @@ namespace ControleFinanceiro.Data.Contexts
         #region DbSet
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
+        public virtual DbSet<Destinatario> Destinatario { get; set; }
+        public virtual DbSet<FormaPagamento> FormaPagamento { get; set; }
+        public virtual DbSet<Instituicao> Instituicao { get; set; }
+        public virtual DbSet<Gastos> Gastos { get; set; }
         #endregion DbSet
 
 

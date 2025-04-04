@@ -20,11 +20,13 @@ namespace ControleFinanceiro.Service.Extensions
             //services
             services.AddSingleton<IUsuarioService, UsuarioService>();
             services.AddSingleton<ICategoriaService, CategoriaService>();
+            services.AddSingleton<IGastosService, GastosService>();
 
             //Repository
             services.AddSingleton(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddSingleton(typeof(IUsuarioRepository), typeof(UsuarioRepository));
             services.AddSingleton(typeof(ICategoriaRepository), typeof(CategoriaRepository));
+            services.AddSingleton(typeof(IGastosRepository), typeof(GastosRepository));
 
             //Mapper
             services.AddAutoMapper(typeof(ComecRegistroAdolescentesProfile).Assembly);
@@ -32,7 +34,7 @@ namespace ControleFinanceiro.Service.Extensions
             services.AddHealthChecks();
 
             //Http Clients
-            services.AddHttpClient("api-favorecido", c =>
+            services.AddHttpClient("api-externa", c =>
             {
                 c.BaseAddress = new Uri("https://localhost:5011/");
             });
