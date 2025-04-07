@@ -33,12 +33,12 @@ namespace ControleFinanceiro.Data.Repositories
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<IEnumerable<GastosResponse>> ObterPorUsuarioAsync(string cpf)
+        public async Task<IEnumerable<GastosResponse>> ObterPorUsuarioAsync(int id)
         {
             try
             {
                 var result = await _context.Gastos.AsNoTracking()
-                    .Where(x => x.UsuarioEntity.Cpf == cpf)
+                    .Where(x => x.UsuarioEntity.Id == id)
                     .Include(x => x.UsuarioEntity)
                     .Include(x => x.CategoriaEntity)
                     .Include(x => x.DestinatarioEntity)

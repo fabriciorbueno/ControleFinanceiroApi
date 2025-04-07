@@ -1,4 +1,5 @@
-﻿using ControleFinanceiro.Domain.Dtos;
+﻿using Azure.Core;
+using ControleFinanceiro.Domain.Dtos;
 using ControleFinanceiro.Domain.Entities;
 using ControleFinanceiro.Domain.Interfaces.Repositories;
 using ControleFinanceiro.Domain.Interfaces.Services;
@@ -22,7 +23,10 @@ namespace ControleFinanceiro.Service.Services
 
         public async Task<IEnumerable<GastosResponse>> ObterPorUsuarioAsync(string cpf)
         {
-            return await _repository.ObterPorUsuarioAsync(cpf);
+            var usuario = await _usuarioRepository.ObterPorCpfAsync(cpf);
+            if (usuario == null) return null;
+
+            return await _repository.ObterPorUsuarioAsync(usuario.Id);
         }
 
         public async Task<bool> AdicionarAsync(GastosRequest request)

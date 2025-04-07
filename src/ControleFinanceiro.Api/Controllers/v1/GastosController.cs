@@ -37,7 +37,7 @@ namespace ControleFinanceiro.Api.Controllers.v1
 
             if (response == null)
             {
-                return NoContent();
+                return BadRequest("Usuário não encontrado!");
             }
 
             return Ok(response);

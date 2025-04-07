@@ -8,7 +8,7 @@ namespace ControleFinanceiro.Domain.Interfaces.Repositories
     public interface IGastosRepository : IBaseRepository<Gastos>
     {
         Task<IEnumerable<Gastos>> ObterTodosAsync();
-        Task<IEnumerable<GastosResponse>> ObterPorUsuarioAsync(string cpf);
+        Task<IEnumerable<GastosResponse>> ObterPorUsuarioAsync(int id);
         Task<bool> AdicionarAsync(Gastos gastos);
     }
 }
