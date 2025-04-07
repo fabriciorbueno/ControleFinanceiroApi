@@ -18,15 +18,21 @@ namespace ControleFinanceiro.Service.Extensions
             services.AddSingleton<ControleFinanceiroContext>();
 
             //services
-            services.AddSingleton<IUsuarioService, UsuarioService>();
             services.AddSingleton<ICategoriaService, CategoriaService>();
+            services.AddSingleton<IDestinatarioService, DestinatarioService>();
+            services.AddSingleton<IFormaPagamentoService, FormaPagamentoService>();
             services.AddSingleton<IGastosService, GastosService>();
+            services.AddSingleton<IInstituicaoService, InstituicaoService>();
+            services.AddSingleton<IUsuarioService, UsuarioService>();
 
             //Repository
             services.AddSingleton(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddSingleton(typeof(IUsuarioRepository), typeof(UsuarioRepository));
             services.AddSingleton(typeof(ICategoriaRepository), typeof(CategoriaRepository));
+            services.AddSingleton(typeof(IDestinatarioRepository), typeof(DestinatarioRepository));
+            services.AddSingleton(typeof(IFormaPagamentoRepository), typeof(FormaPagamentoRepository));
             services.AddSingleton(typeof(IGastosRepository), typeof(GastosRepository));
+            services.AddSingleton(typeof(IInstituicaoRepository), typeof(InstituicaoRepository));
+            services.AddSingleton(typeof(IUsuarioRepository), typeof(UsuarioRepository));
 
             //Mapper
             services.AddAutoMapper(typeof(ComecRegistroAdolescentesProfile).Assembly);
